@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
 }
 
+apply from: "config.gradle"
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -17,6 +19,10 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        compose true
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -27,8 +33,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion versions.composeVersion
     }
 }
 
@@ -36,12 +47,35 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
 
     implementation 'androidx.fragment:fragment-ktx:1.3.6'
+
+    implementation "androidx.compose.ui:ui:${versions.composeVersion}"
+    // Tooling support (Previews, etc.)
+    implementation "androidx.compose.ui:ui-tooling:${versions.composeVersion}"
+    // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)
+    implementation "androidx.compose.foundation:foundation:${versions.composeVersion}"
+    // Material Design
+    implementation "androidx.compose.material:material:${versions.composeVersion}"
+    // Animations
+    implementation "androidx.compose.animation:animation:${versions.composeVersion}"
+    // Material design icons
+    implementation "androidx.compose.material:material-icons-core:${versions.composeVersion}"
+    implementation "androidx.compose.material:material-icons-extended:${versions.composeVersion}"
+    // Integration with activities
+    implementation 'androidx.activity:activity-compose:1.3.1'
+    // Integration with ViewModels
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07'
+    // Integration with observables
+    implementation "androidx.compose.runtime:runtime-livedata:${versions.composeVersion}"
+    implementation "androidx.compose.runtime:runtime-rxjava2:${versions.composeVersion}"
+
+    // UI Tests
+    androidTestImplementation "androidx.compose.ui:ui-test-junit4:${versions.composeVersion}"
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

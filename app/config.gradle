@@ -1,0 +1,4 @@
+// https://stackoverflow.com/questions/28628845/how-to-get-acces-to-values-from-another-gradle-file
+project.ext.versions = [
+        "composeVersion": "1.0.1"
+]
